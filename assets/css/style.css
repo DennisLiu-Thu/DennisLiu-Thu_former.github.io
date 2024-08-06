@@ -57,6 +57,7 @@
   /* solid */
 
   --jet: hsl(0, 0%, 22%);
+  --light-jet: hsl(0, 0%, 32%);
   --onyx: hsl(240, 1%, 17%);
   --eerie-black-1: hsl(240, 2%, 13%);
   --eerie-black-2: hsl(240, 2%, 12%);
@@ -158,7 +159,19 @@ html { font-family: var(--ff-poppins); }
 body { background: var(--smoky-black); }
 
 
+.separatorline {
+  width: 90%;
+  height: 1px;
+  background: var(--jet);
+  margin: 16px 0;
+}
 
+.separatorlinePortfolio {
+  width: 100%;
+  height: 1px;
+  background: var(--light-jet);
+  margin: 16px 0;
+}
 
 
 /*-----------------------------------*\
@@ -492,6 +505,46 @@ main {
 
 
 /*-----------------------------------*\
+  #CORNERBAR
+\*-----------------------------------*/
+
+.cornerbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: hsla(240, 1%, 17%, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--jet);
+  border-radius: 12px 12px 0 0;
+  box-shadow: var(--shadow-2);
+  z-index: 5;
+}
+
+.cornerbar-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.cornerbar-link {
+  color: var(--light-gray);
+  font-size: var(--fs-8);
+  padding: 10px 7px;
+  transition: color var(--transition-1);
+}
+
+.cornerbar-link:hover,
+.cornerbar-link:focus { color: var(--light-gray-70); }
+
+.cornerbar-link.active { color: var(--orange-yellow-crayola); }
+
+
+
+
+/*-----------------------------------*\
   #ABOUT
 \*-----------------------------------*/
 
@@ -790,16 +843,17 @@ main {
 .timeline-item:not(:last-child) { margin-bottom: 20px; }
 
 .timeline-item-title {
-  font-size: var(--fs-6);
+  font-size: var(--fs-5);
   line-height: 1.3;
   margin-bottom: 7px;
 }
 
-.timeline-list span {
+.timeline-span {
   color: var(--vegas-gold);
   font-weight: var(--fw-400);
   line-height: 1.6;
 }
+
 
 .timeline-item:not(:last-child)::before {
   content: "";
@@ -828,6 +882,37 @@ main {
   font-weight: var(--fw-300);
   line-height: 1.6;
 }
+
+.timeline-institutiontext {
+  color: var(--light-gray-70);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+}
+
+.pointlist {
+  list-style-type: none; /* 移除默认的列表项标记 */
+  margin-left: 5px; /* 可选项：增加一些左边距以缩进列表 */
+  padding-left: 0; /* 移除默认的左内边距 */
+  color: var(--light-gray);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+}
+
+.pointlist li {
+  position: relative;
+  padding-left: 15px; /* 调整这个值以为圆点腾出空间 */
+}
+
+.pointlist li::before {
+  content: '•'; /* 使用圆点字符 */
+  position: absolute;
+  left: 0;
+  top: 1.5px;
+  color: var(--light-gray); /* 将其更改为你想要的颜色 */
+  font-size: 20px; /* 根据需要调整大小 */
+  line-height: 1; /* 确保圆点垂直对齐文本 */
+}
+
 
 
 /**
@@ -1658,6 +1743,20 @@ textarea.form-input::-webkit-resizer { display: none; }
   .project-list, .blog-posts-list { grid-template-columns: 1fr 1fr; }
 
 
+  /*-----------------------------------*\
+  #GALLERY
+\*-----------------------------------*/
+
+.gallery .article-title { margin-bottom: 15px; }
+
+.gallery p {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+}
+
+.gallery-text p { margin-bottom: 15px; }
 
   /**
    * CONTACT
@@ -1962,6 +2061,31 @@ textarea.form-input::-webkit-resizer { display: none; }
     margin: 0 auto;
   }
 
+  .project-details .pointlist {
+    list-style-type: none; /* 移除默认的列表项标记 */
+    margin-left: 5px; /* 可选项：增加一些左边距以缩进列表 */
+    padding-left: 0; /* 移除默认的左内边距 */
+    font-size: var(--fs-6);
+    color: var(--light-gray);
+    font-weight: var(--fw-300);
+    line-height: 1.6;
+  }
+  
+  .project-details .pointlist li {
+    position: relative;
+    padding-left: 15px; /* 调整这个值以为圆点腾出空间 */
+  }
+  
+  .project-details .pointlist li::before {
+    content: '•'; /* 使用圆点字符 */
+    position: absolute;
+    left: 0;
+    top: 1.5px;
+    color: var(--light-gray); /* 将其更改为你想要的颜色 */
+    font-size: 20px; /* 根据需要调整大小 */
+    line-height: 1; /* 确保圆点垂直对齐文本 */
+  }
+
 
   .responsive-video {
     width: 100%;
@@ -1980,4 +2104,75 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
 
+}
+
+
+/* 确保使用响应式布局 */
+/* .project-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+} */
+
+.project-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.responsive-video {
+  width: 100%;
+  height: auto;
+}
+
+/* 基础媒体查询例子 */
+@media (max-width: 768px) {
+  .project-details {
+    padding: 15px;
+  }
+  .project-img {
+    width: 100%;
+    height: auto;
+  }
+  .responsive-video {
+    width: 100%;
+    height: auto;
+  }
+  .navbar-link {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .project-details {
+    padding: 30px;
+  }
+  .project-img {
+    width: 100%;
+    height: auto;
+  }
+  .responsive-video {
+    width: 100%;
+    height: auto;
+  }
+  .navbar-link {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-details {
+    padding: 45px;
+  }
+  .project-img {
+    width: 100%;
+    height: auto;
+  }
+  .responsive-video {
+    width: 100%;
+    height: auto;
+  }
+  .navbar-link {
+    font-size: 18px;
+  }
 }

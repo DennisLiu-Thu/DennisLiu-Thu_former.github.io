@@ -61,6 +61,62 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
+// custom select variables
+const select = document.querySelector("[data-select]");
+const selectItems = document.querySelectorAll("[data-select-item]");
+const selectValue = document.querySelector("[data-selecct-value]");
+const filterBtn = document.querySelectorAll("[data-filter-btn]");
+
+select.addEventListener("click", function () { elementToggleFunc(this); });
+
+// add event in all select items
+for (let i = 0; i < selectItems.length; i++) {
+  selectItems[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
+    selectValue.innerText = this.innerText;
+    elementToggleFunc(select);
+    filterFunc(selectedValue);
+
+  });
+}
+
+// filter variables
+const filterItems = document.querySelectorAll("[data-filter-item]");
+
+const filterFunc = function (selectedValue) {
+
+  for (let i = 0; i < filterItems.length; i++) {
+
+    if (selectedValue === filterItems[i].dataset.category) {
+      filterItems[i].classList.add("active");
+    } else {
+      filterItems[i].classList.remove("active");
+    }
+
+  }
+
+}
+
+// add event in all filter button items for large screen
+let lastClickedBtn = filterBtn[0];
+
+for (let i = 0; i < filterBtn.length; i++) {
+
+  filterBtn[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
+    selectValue.innerText = this.innerText;
+    filterFunc(selectedValue);
+
+    lastClickedBtn.classList.remove("active");
+    this.classList.add("active");
+    lastClickedBtn = this;
+
+  });
+
+}
+
 // 获取所有带有 data-nav-link 属性的元素，包括导航链接和项目项
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
@@ -89,5 +145,34 @@ navigationLinks.forEach(link => {
       }
     });
   });
+});
+
+
+//中英转换
+
+document.getElementById('lang-toggle-en').addEventListener('click', function() {
+  // 隐藏中文元素，显示英文元素
+  const zhElements = document.querySelectorAll('.lang-zh');
+  const enElements = document.querySelectorAll('.lang-en');
+
+  zhElements.forEach(el => el.style.display = 'none');
+  enElements.forEach(el => el.style.display = '');
+
+  // 给当前按钮添加active类，移除其他按钮的active类
+  document.getElementById('lang-toggle-en').classList.add('active');
+  document.getElementById('lang-toggle-zh').classList.remove('active');
+});
+
+document.getElementById('lang-toggle-zh').addEventListener('click', function() {
+  // 显示中文元素，隐藏英文元素
+  const zhElements = document.querySelectorAll('.lang-zh');
+  const enElements = document.querySelectorAll('.lang-en');
+
+  zhElements.forEach(el => el.style.display = '');
+  enElements.forEach(el => el.style.display = 'none');
+
+  // 给当前按钮添加active类，移除其他按钮的active类
+  document.getElementById('lang-toggle-zh').classList.add('active');
+  document.getElementById('lang-toggle-en').classList.remove('active');
 });
 
